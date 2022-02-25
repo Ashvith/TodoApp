@@ -3,7 +3,7 @@ class TodoListsController < ApplicationController
 
   # GET /todo_lists
   def index
-    @todo_lists = TodoList.all
+    @todo_lists = TodoList.order(created_at: :desc)
   end
 
   # GET /todo_lists/1
@@ -24,7 +24,10 @@ class TodoListsController < ApplicationController
     @todo_list = TodoList.new(todo_list_params)
 
     if @todo_list.save
-      redirect_to @todo_list, notice: "Todo list was successfully created."
+      respond_to do |format|
+        format.html { redirect_to @todo_list, notice: "Todo list was successfully created." }
+        format.turbo_stream
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -42,17 +45,21 @@ class TodoListsController < ApplicationController
   # DELETE /todo_lists/1
   def destroy
     @todo_list.destroy
-    redirect_to todo_lists_url, notice: "Todo list was successfully destroyed."
+    respond_to do |format|
+      format.html { redirect_to todo_lists_url, notice: "Todo list was successfully destroyed." }
+      format.turbo_stream
+    end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_todo_list
-      @todo_list = TodoList.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def todo_list_params
-      params.require(:todo_list).permit(:title)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_todo_list
+    @todo_list = TodoList.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def todo_list_params
+    params.require(:todo_list).permit(:title)
+  end
 end
