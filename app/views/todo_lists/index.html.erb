@@ -1,14 +1,24 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Todo lists</h1>
-
-<div id="todo_lists">
-  <% @todo_lists.each do |todo_list| %>
-    <%= render todo_list %>
-    <p>
-      <%= link_to "Show this todo list", todo_list %>
-    </p>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col mt-5">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between">
+          <div>
+            <p class="h3 m-0"><b>Todo List</b></p>
+          </div>
+          <div>
+            <%= link_to "New", new_todo_list_path, class: "btn btn-primary", data: { turbo_frame: dom_id(TodoList.new) }%>
+          </div>
+        </div>
+        <ul class="list-group">
+          <%= turbo_frame_tag TodoList.new %>
+          <%= turbo_frame_tag "todo_lists" do %>
+            <% @todo_lists.each do |todo_list| %>
+              <%= render todo_list %>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New todo list", new_todo_list_path %>
