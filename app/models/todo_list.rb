@@ -1,5 +1,5 @@
 class TodoList < ApplicationRecord
-  validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 255 }
 
   after_create_commit -> { broadcast_prepend_later_to "todo_lists" }
   after_update_commit -> { broadcast_update_later_to "todo_lists" }
