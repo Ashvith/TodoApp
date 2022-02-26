@@ -1,24 +1,27 @@
-<div class="container">
-  <div class="row">
-    <div class="col mt-5">
-      <div class="card">
-        <div class="card-header d-flex justify-content-between">
-          <div>
-            <p class="h3 m-0"><b>Todo List</b></p>
-          </div>
-          <div>
-            <%= link_to "New", new_todo_list_path, class: "btn btn-primary", data: { turbo_frame: dom_id(TodoList.new) }%>
+<%= turbo_stream_from "todo_lists" %>
+
+<section class="section">
+  <div class="container">
+    <div class="card has-background-primary-light">
+      <div class="card-header mb-2">
+        <div class="card-header-title">
+          <p class="title is-4 m-0 py-2 media-content has-text-primary">Todo List</p>
+          <div class="media-right">
+            <%= link_to "New", new_todo_list_path, class: "button is-primary is-light is-rounded", data: { turbo_frame: dom_id(TodoList.new) } %>
           </div>
         </div>
-        <ul class="list-group">
-          <%= turbo_frame_tag TodoList.new %>
-          <%= turbo_frame_tag "todo_lists" do %>
-            <% @todo_lists.each do |todo_list| %>
-              <%= render todo_list %>
-            <% end %>
-          <% end %>
-        </ul>
       </div>
     </div>
+
+    <article class="panel has-background-white">
+      <%= turbo_frame_tag TodoList.new %>
+      <%= turbo_frame_tag "todo_lists" do %>
+        <% @todo_lists.each do |todo_list| %>
+          <%= render todo_list %>
+          <% end %>
+      <% end %>
+    </article>
+   
   </div>
-</div>
+</section>
+

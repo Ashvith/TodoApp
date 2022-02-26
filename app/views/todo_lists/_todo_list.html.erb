@@ -1,17 +1,21 @@
 <%= turbo_frame_tag todo_list do %>
-  <li class="list-group-item">
-    <div class="d-flex justify-content-between" id="<%= dom_id todo_list %>">
-      <span>
-        <%= link_to todo_list.title, todo_list, data: { turbo_frame: "_top" } %>
-      </span>
-      <div>
-        <%= link_to edit_todo_list_path(todo_list), class: "btn btn-success" do %>
-          <i class="fa-solid fa-edit"></i>
-        <% end %>
-        <%= link_to todo_list, data: { turbo_method: :delete }, class: "btn btn-danger" do %>
-          <i class="fa-solid fa-x"></i>
-        <% end %>
+  <div class="card">
+    <div class="card-header-title">
+      <%= link_to todo_list, data: { turbo_frame: "_top" }, class: "media-content" do %>
+        <%= todo_list.title %>
+      <% end %>
+      <div class="media-right">
+        <div class="field is-grouped">
+          <div class="control">
+            <%= link_to edit_todo_list_path(todo_list), class: "button is-info is-light is-rounded" do %>
+              <i class="fa-solid fa-edit"></i>
+            <% end %>
+            <%= link_to todo_list, data: { turbo_method: :delete }, class: "button is-danger is-light is-rounded" do %>
+              <i class="fa-solid fa-x"></i>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
-  </li>
+  </div>
 <% end %>

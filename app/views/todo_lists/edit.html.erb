@@ -1,10 +1,19 @@
-<h1>Editing todo list</h1>
-
-<%= render "form", todo_list: @todo_list %>
-
-<br>
-
-<div>
-  <%= link_to "Show this todo list", @todo_list %> |
-  <%= link_to "Back to todo lists", todo_lists_path %>
-</div>
+<section class="section">
+  <div class="container">
+    <div class="card has-background-primary-light">
+      <div class="card-header mb-2">
+        <div class="card-header-title">
+          <p class="title is-4 m-0 py-2 media-content has-text-primary">Edit new Todo List</p>
+          <div class="media-right">
+            <%= link_to "Back", todo_lists_path, class: "button is-primary is-light is-rounded", data: { turbo_frame: "_top" } %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <article class="panel is-primary">
+      <%= turbo_frame_tag @todo_list do %>
+        <%= render "form", todo_list: @todo_list %>
+      <% end %>
+    </article>
+  </div>
+</section>
