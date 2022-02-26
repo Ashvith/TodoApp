@@ -18,8 +18,7 @@
           <%= form.text_field :title, class: "input", placeholder: "Enter a title..." %>
         </div>
         <div class="media-right">
-          <%= form.submit action_name.capitalize, 
-          class: "button is-primary" %>
+          <%= form.submit (action_name=="new"?"Create":"Update"), class: "button is-link is-rounded" %>
         </div>
       </div>
     </div>
