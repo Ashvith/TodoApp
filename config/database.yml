@@ -83,4 +83,4 @@ production:
   <<: *default
   database: todo_hotwire_production
   username: todo_hotwire
-  password: <%= ENV["TODO_HOTWIRE_DATABASE_PASSWORD"] %>
+  password: <%= ENV["DATABASE_URL"] %>
