@@ -31,6 +31,9 @@ FileUtils.chdir APP_ROOT do
   puts "\n== Installing node packages =="
   system! "npm update"
 
+  puts "\n== Precompiling assets =="
+  system! "rails assets:precompile"
+
   puts "\n== Restarting application server =="
   system! "bin/rails restart"
 end
