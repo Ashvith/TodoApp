@@ -32,7 +32,7 @@ FileUtils.chdir APP_ROOT do
   system! "npm update"
 
   puts "\n== Precompiling assets =="
-  system! "rails assets:precompile"
+  system! "bin/rails assets:precompile"
 
   puts "\n== Restarting application server =="
   system! "bin/rails restart"
